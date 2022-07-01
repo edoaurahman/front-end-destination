@@ -20,7 +20,6 @@ function Dashboard({ topDestination, trendingDestination }) {
     }
     )
   }
-
   return (
     <div>
       <Carousel>
