@@ -1,0 +1,45 @@
+.detail-title {
+    position: absolute;
+    right: 15%;
+    bottom: 10rem;
+    left: 15%;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    color: rgb(247, 247, 247);
+    text-align: center;
+}
+
+.detail-img {
+    filter: brightness(50%);
+
+}
+
+.carousel-img {
+    height: 400px;
+    width: auto;
+}
+
+.dashboard-img {
+    height: 200px;
+    width: auto;
+    object-fit: cover;
+}
+
+.comment-section {
+    overflow-y: scroll;
+    height: 300px;
+    display: block;
+}
+
+.comment-box {
+    background-color: rgb(235, 235, 235);
+}
+
+.rating {
+    color: yellow;
+}
+
+.star-position {    
+    align-items: center;
+    width: 120px;
+}
