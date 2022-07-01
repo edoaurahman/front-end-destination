@@ -56,9 +56,9 @@ function Admin() {
                 <td>{destination.destination_name}</td>
                 <td>{destination.facility}</td>
                 <td>
-                  <Button variant='primary btn-sm'>Update</Button>
+                  <Button variant='primary btn-sm' as={Link} to={'update/' + destination.destination_name}>Update</Button>
                   <Button variant='danger btn-sm' onClick={() => deleteDestination(destination.id)}>Delete</Button>
-                  <Button variant='warning btn-sm' as={Link} to={'/add-image/' + destination.destination_name}>Add Image</Button>
+                  <Button variant='warning btn-sm' as={Link} to={'/add-image/' + destination.destination_name}>Add / Delete Image</Button>
                 </td>
               </tr>
             ))}

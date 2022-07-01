@@ -20,7 +20,6 @@ function Dashboard({ topDestination, trendingDestination }) {
     }
     )
   }
-
   return (
     <div>
       <Carousel>
@@ -57,7 +56,7 @@ function Dashboard({ topDestination, trendingDestination }) {
                       <Card.Text>
                         {item.description}
                       </Card.Text>
-                      <Button variant="warning" onClick={() => navigate('/detail/' + item.destination_name)}>
+                      <Button variant="warning w-100" onClick={() => navigate('/detail/' + item.destination_name)}>
                         Detail
                       </Button>
                     </Card.Body>

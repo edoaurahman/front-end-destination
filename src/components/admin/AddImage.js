@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Container, Form, Col, Row, Image } from 'react-bootstrap';
+import { Button, Container, Form, Col, Row, Card } from 'react-bootstrap';
 import axios from 'axios';
 import { API } from '../../utils/api';
 import { useParams } from 'react-router-dom';
@@ -13,6 +13,7 @@ function AddImage() {
                 if (res.status === 200) {
                     alert(res.data.message);
                     // navigate('/admin');
+                    document.getElementById('inputFileImage').value = null
                     getDetail()
                 }
             })
@@ -28,7 +29,13 @@ function AddImage() {
 
     };
     const [detail, setDetail] = useState(getDetail);
-    console.log(detail);
+    const deleteImage = (id) => {
+        axios.delete(API + '/v1/detination/image/delete/' + id)
+        .then(res => {
+            alert(res.data.message)
+            getDetail()
+        })
+    }
     return (
         <div>
             <div className="bg-light w-100">
@@ -44,7 +51,12 @@ function AddImage() {
                     <Row>
                         {detail && detail.image.map(item => (
                             <Col lg={3} key={item.id}>
-                                <Image thumbnail src={'http://localhost:8000/images/destination/' + item.image_name} />
+                                <Card>
+                                    <Card.Img variant="top" src={'http://localhost:8000/images/destination/' + item.image_name}/>
+                                    <Card.Body>
+                                        <Button variant='danger' className='w-100' thumbnail onClick={() => deleteImage(item.id)}>Delete</Button>
+                                    </Card.Body>
+                                </Card>
                             </Col>
                         ))}
                     </Row>
@@ -58,7 +70,7 @@ function AddImage() {
                     <Form.Control type="text" name="destination_id" defaultValue={detail && detail.id} hidden readOnly />
                     <Form.Group className="mb-3">
                         <Form.Label>Foto</Form.Label>
-                        <Form.Control type="file" name='image' />
+                        <Form.Control type="file" id='inputFileImage' name='image' required/>
                     </Form.Group>
                     <Button type='submit'>Simpan</Button>
                 </Form>

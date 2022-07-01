@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Add from "./components/admin/Add";
 import Admin from "./components/admin/Admin";
+import Update from "./components/admin/Update";
 import Dashboard from "./components/Dashboard";
 import Detail from "./components/Detail";
 import Footer from "./components/Footer";
@@ -24,7 +25,7 @@ function App() {
 
     getTopDestination();
     getTrendingDestination();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const getTopDestination = () => {
@@ -50,14 +51,26 @@ function App() {
   const [user, setUser] = useState()
   return (
     <div>
-      <Navigation user={user} setUser={setUser} setTrendingDestination={setTrendingDestination} setTopDestination={setTopDestination} />
+      <Navigation user={user}
+        setUser={setUser}
+        setTrendingDestination={setTrendingDestination}
+        setTopDestination={setTopDestination}
+      />
       <Routes>
         <Route path="/login" element={<Login user={user} setUser={setUser} />} />
         <Route path="/detail/:slug" element={<Detail user={user} topDestination={topDestination} />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Dashboard trendingDestination={trendingDestination} topDestination={topDestination} />} />
+        <Route path="/"
+          element={
+            <Dashboard
+              trendingDestination={trendingDestination}
+              topDestination={topDestination}
+            />
+          }
+        />
         {/* For admin */}
         <Route path="/admin" element={<Admin />} />
+        <Route path="/admin/update/:slug" element={<Update />} />
         <Route path="/add-image/:slug" element={<AddImage />} />
         <Route path="/add-destination" element={<Add />} />
       </Routes>

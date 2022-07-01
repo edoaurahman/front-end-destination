@@ -92,9 +92,14 @@ function Detail({ user, destination }) {
                 </Row>
 
                 <div className='mt-5 border rounded shadow p-5 mb-5'>
+                    <h5>Deskripsi : </h5>
+                    <hr />
                     <p>
                         {detail && detail.description}
                     </p>
+                    <h5>Fasilitas : </h5>
+                    <hr />
+                    <p>{detail && detail.facility}</p>
                 </div>
 
                 <Row>
