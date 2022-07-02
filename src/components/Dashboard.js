@@ -1,6 +1,8 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import { Button, Card, Carousel, Col, Container, Form, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom'
+import { API } from '../utils/api';
 
 function Dashboard({ topDestination, trendingDestination }) {
   const navigate = useNavigate();
@@ -20,6 +22,14 @@ function Dashboard({ topDestination, trendingDestination }) {
     }
     )
   }
+  const getComment = () => {
+    axios.get(API + '/v1/comments')
+      .then(res => {
+        setComment(res.data);
+      })
+  }
+
+  const [comment, setComment] = useState(getComment);
   return (
     <div>
       <Carousel>
@@ -93,14 +103,15 @@ function Dashboard({ topDestination, trendingDestination }) {
           <Col lg={6}>
             <h1 className='text-center'>Komentar</h1>
             <hr />
-
-            <div className='border rounded shadow p-3'>
-              <div className='fw-bold'>Edo - <span onClick={() => { navigate('/detail/judul') }}>asdasd</span></div>
-              <hr />
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quasi sed quis nobis nisi corporis nemo dicta magni officia modi molestias voluptates, hic voluptatum? Vel omnis illo saepe tenetur dicta ex suscipit hic doloremque expedita mollitia provident amet quia laudantium ipsa natus, magnam, ab eligendi. A aut dolorum pariatur officia, tempora deserunt quasi animi, quo harum ipsam ipsa. Tempore nobis quod, voluptate, qui tempora ut labore, voluptates impedit et expedita minima rerum nemo enim blanditiis culpa eveniet at similique numquam aut saepe ipsa non dolorem ipsam. Enim nisi aliquam saepe quae exercitationem est, vero error accusantium ratione voluptate ut quibusdam.
-              </p>
-            </div>
+            {comment && comment.map(item => (
+              <div key={item.id} className='border rounded shadow p-3'>
+                <div className='fw-bold pe-auto' role="button">{item.user.name} - <span onClick={() => { navigate('/detail/' + item.destination.destination_name) }}>{item.destination.destination_name}</span></div>
+                <hr />
+                <p>
+                  {item.comment}
+                </p>
+              </div>
+            ))}
           </Col>
           <Col lg={6}>
             <h1 className='text-center'>SUBSCRIBE</h1>

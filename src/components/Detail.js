@@ -4,7 +4,7 @@ import { Button, Card, Col, Container, Form, Image, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { API } from '../utils/api';
 
-function Detail({ user, destination }) {
+function Detail({ user, topDestination }) {
     const { slug } = useParams();
     useEffect(() => {
         getDetail()
@@ -141,7 +141,7 @@ function Detail({ user, destination }) {
                             <h1 className='text-center'>Destinasi Lainnya</h1>
                             <hr />
                             <Row>
-                                {destination && destination.slice(0, 4).map(item => (
+                                {topDestination && topDestination.slice(0, 4).map(item => (
                                     <Col key={item.id} lg={6} className="mb-2">
                                         <Card>
                                             <Card.Img variant="top" src={"http://localhost:8000/images/destination/" + item.image[0].image_name} />
